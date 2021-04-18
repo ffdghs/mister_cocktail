@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MisterCocktails</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" /> 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="assets/css/cocktails.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+                <a class="navbar-brand" href="index.php"><i class="fas fa-cocktail"></i></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+        
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <?php include 'templates/inc/nav.phtml' ?>
+                </div>
+        </nav>
+        <div class="header">
+            <h1>Mister Cocktails</h1>
+        </div>
+    </div>
+</header>
+    <main> 
+        <div class="container">
+            <h2>Modification d'un cocktail <i class="fas fa-cocktail"></i> dans la base de données</h2>
+            <div><?= $msg ?></div>
+            <div class="retour">
+                <a class="fleche" href="backOffice.php"><i class="fas fa-arrow-circle-left"></i></a>
+                <span>Retour à la liste</span>
+            </div>
+            <h3>Valeurs actuelles :</h3>
+            <table class="table table-striped table-bordered table-dark table-hover text-center">
+                <thead class="thead-dark"> 
+                    <tr>
+                        <td>#</td>
+                        <td>Nom</td>
+                        <td>Photo</td>
+                        <td>Famille</td>
+                        <td>Description</td>
+                        <td>Date de conception</td>
+                        <td>Prix Moyen</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="align-middle"><?= $cocktailModif['id']?></td>
+                        <td class="align-middle"><?= $cocktailModif['nom']?></td>
+                        <td class="align-middle"><img src="assets/images/cocktails/<?= $cocktailModif['urlPhoto']?>" alt="" width="150px"></td>
+                        <td class="align-middle"><?= $cocktailModif['nomFamille']?></td>
+                        <td><?= $cocktailModif['description']?></td>
+                        <td class="align-middle"><?= $cocktailModif['anneeConception']?></td>
+                        <td class="align-middle"><?= $cocktailModif['prixMoyen']?></td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Modifications :</h3>
+            <form method="POST" class="formModif">
+                <!-- <div class="form-group">
+                    <label for="id">ID</label> -->
+                    <input type="hidden" type="text" id="id" name="id" value="<?= $cocktailModif['id']?>">
+                <!-- </div> -->
+                <div class="form-group">
+                    <label for="nom">Nom</label>
+                    <input class="form-control" type="text" id="nom" name="nom" value="<?= $cocktailModif['nom']?>">
+                </div>
+                <div class="form-group">
+                    <label for="photo">URL de la photo</label>
+                    <input class="form-control" type="text" id="photo" name="photo" value="<?= $cocktailModif['urlPhoto']?>">
+                </div>
+                <div class="form-group">
+                    <label for="idFamille">Catégorie</label>
+                    <select class="form-control" name="idFamille" id="idFamille">
+                        <?php foreach($listeDesCategories AS $soustableau) { ?>
+                            <option value="<?=$soustableau['id']?>" <?php if($cocktailModif['idFamille']==$soustableau['id']){echo 'selected';}?>>
+                                <?=$soustableau['nomFamille']?>
+                            </option>
+                        <?php } ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="desc">Description</label>
+                    <textarea class="form-control" name="desc" id="desc" cols="20" rows="10"><?= $cocktailModif['description']?></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="date">Date de conception</label>
+                    <input class="form-control" type="text" id="date" name="date" value="<?= $cocktailModif['anneeConception']?>">
+                </div>
+                <div class="form-group">
+                    <label for="prix">Prix Moyen</label>
+                    <input class="form-control" type="text" id="prix" name="prix" value="<?= $cocktailModif['prixMoyen']?>">
+                </div>
+                <div>
+                    <button class="btn btn-dark" type="submit" name="ajouter"><i class="fas fa-save"></i></button>
+                    <!-- <a href="?action=modifier&id=<?=$cocktailModif['id']?>" class="btn btn-dark" type="submit" name="annuler"><i class="fas fa-undo"></i></a> -->
+                    <button type="reset" class="btn btn-dark" type="submit" name="annuler"><i class="fas fa-undo"></i></button>
+                </div>
+            </form>
+        </div>
+
+
+
+      
+    </main>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+</body>
+</html>

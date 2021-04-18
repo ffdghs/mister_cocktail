@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MisterCocktails</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" /> 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="assets/css/cocktails.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+                <a class="navbar-brand" href="index.php"><i class="fas fa-cocktail"></i></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+        
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <?php include 'templates/inc/nav.phtml' ?>
+                <form action="index.php" class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="recherche">
+                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+        <div class="header">
+            <h1>Mister Cocktails</h1>
+        </div>
+    </div>
+</header>
+        <main> 
+            <div class="container">
+                <div class="nav-item dropdown active border border-dark mb-5">
+                    <a class="nav-link dropdown-toggle btn btn-outline-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Filtrer par catégorie de cocktails</a>
+                    <div class="dropdown-menu bg-light" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="index.php">-- Tous les cocktails -- (<?=$nbreCocktails['nbreCocktails']?>)</a>
+                        <?php foreach($listeFamille AS $soustableau) { ?>
+                            <a class="dropdown-item" href="<?='?categorie=' . $soustableau['nomFamille']?>"><?=$soustableau['nomFamille']?> (<?=$soustableau['nbreParFamille'] ?>)</a>
+                            <!-- <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a> -->
+                
+                        <?php } ?>
+                    </div>
+                </div>
+                <div>
+                    <p><?= $message ?></p>
+                </div>
+                <div class="row justify-content-around">
+                    <?php foreach($listeCocktails AS $sousTableau) { ?>
+                        
+                    <div class="card cocktail bg-light">
+                        <a href="detailsCocktail.php?id=<?=$sousTableau['id']?>"><img src="assets/images/cocktails/<?=$sousTableau['urlPhoto']?>" class="card-img-top" alt="<?=$sousTableau['urlPhoto']?>"></a>
+                        <div class="card-body bg-light">
+                            <a href="detailsCocktail.php?id=<?=$sousTableau['id']?>"><h5 class="card-title"><?=$sousTableau['nom'] ?></h5></a>
+                            <!-- <p class="card-text "><?= iconv_substr($sousTableau['description'],0,110) ?>... <a href="">lire la suite</a></p> -->
+                            <p class="card-text "><?=$sousTableau['description'] ?></p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item bg-light">Année de conception : <?=$sousTableau['anneeConception']?></li>
+                            <li class="list-group-item bg-light">Prix moyen : <?=$sousTableau['prixMoyen']?>€</li>
+                            <li class="list-group-item bg-light text-center"><a class="btn btn-lg btn-dark" href="index.php?categorie=<?=$sousTableau['nomFamille']?>"><?=$sousTableau['nomFamille']?></a></li>
+                        </ul>
+                        <!-- <div class="card-body">
+                            <a href="#" class="card-link">Selectionner</a>
+                        </div> -->
+                    </div>
+                    
+                    <?php } ?>
+                </div>
+        </div>
+
+
+
+      
+    </main>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -1,0 +1,337 @@
+*
+{
+    box-sizing: border-box;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+header {
+    margin-bottom:5rem;
+}
+
+.opacity-0 {
+    opacity:0!important;
+}
+.opacity-1 {
+    opacity:0.2!important;
+}
+.opacity-2 {
+    opacity:0.4!important;
+}
+.opacity-3 {
+    opacity:0.6!important;
+}
+.opacity-4 {
+    opacity:.88!important;
+}
+.opacity-5 {
+    opacity:1!important;
+}
+
+nav > a:first-child {
+    font-size: 2rem;
+}
+
+nav  a {
+    font-size: 1.3rem;
+}
+
+header .container {
+    background-color: white;
+    border-radius: 20px;
+}
+
+
+.nav-item {
+    width:max-content;
+    border-radius: 10px;
+}
+
+
+/* .nav-item a {
+    color:black;
+} */
+
+
+
+.header{
+    background: url('../images/banners/banner-3.jpg');
+    background-size:auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 4rem 0rem 7rem 0rem;
+    text-align: center;
+    border-radius: 20px;
+    max-width: 575px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 5.5rem;
+    font-family: 'Dancing Script', cursive;
+}
+
+body
+{
+    background: linear-gradient(to bottom, #fceabb, #f8b500);
+    font-family: Montserrat, sans-serif;
+    min-height: 100vh;
+    padding: 2rem 0;
+}
+
+h5
+{
+    /* color: black; */
+    color:#19547b;
+    /* text-decoration: underline; */
+    /* text-decoration-color: #19547b; */
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 900;
+    font-family: 'Lobster', cursive;
+}
+p,ul
+{
+    color: #19547b;
+    border-right: none !important;
+    border-left:none !important;
+}
+
+main
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/* .navbar {
+    border:black solid 1px;
+    border-radius:0.5rem;
+} */
+
+nav
+{
+    /* margin-bottom: -1rem; */
+    width: 100%;
+    margin: 0 auto;
+}
+
+.cocktail
+{
+    margin-bottom: 3rem;
+    max-width: 22rem;
+    border-radius:80px 5px;
+}
+
+.cocktail ul
+{
+    border-radius:0 0 50px 5px !important;
+}
+
+.cocktail ul li:nth-child(3) {
+    border-radius:0 0 50px 5px !important;
+} 
+.cocktail ul li:nth-child(1) {
+    border-top-width: 1px !important;
+} 
+
+
+.cocktail img {
+    border-radius:50px 5px 0 0;
+}
+
+.cocktail .card-text {
+    font-size: 90%;
+    text-align: justify;
+}
+
+.card {
+    border:none !important;
+}
+
+main .container > div:first-child {
+    width:fit-content;
+    margin:0 auto;
+}
+
+/* .formAjout {
+    width:40vw;
+    min-width:400px;
+    margin:0 auto;
+} */
+
+.formModif {
+    width:40vw;
+    min-width:400px;
+    margin:0 auto;
+}
+
+
+h2 {
+    margin-bottom:2rem;
+    font-size: 3rem;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 200;
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+    margin-bottom:2rem;
+    font-style: italic;
+    font-family: roboto;
+}
+
+.container div {
+    text-align: center;
+}
+
+button {
+    padding: 1rem 5rem;
+}
+
+button i {
+    font-size: 2rem;
+}
+
+.dropdown-menu {
+    width: 300px !important;
+}
+
+.fa-times-circle {
+    color:rgb(155, 61, 61);
+}
+
+table i {
+    font-size: 2rem;
+}
+
+i.fa-arrow-circle-left {
+    color:black;
+    font-size: 3rem;
+}
+
+.retour {
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom:2rem;
+}
+
+.retour span {
+    font-size: 1.4rem;
+    margin-left:1rem;
+}
+
+.row {
+    position:relative;
+}
+
+.modal {
+    position:fixed;
+    top:10vh;
+    left:20vw;
+    width:100vw;
+    height:100vh;
+}
+
+.message {
+    transition: opacity 0.3s ease-out;
+}
+.message2 {
+    transition: opacity 0.3s ease-out;
+}
+.messages {
+    transition: opacity 0.3s ease-out;
+}
+.newCard {
+    transition: opacity 0.3s ease-out;
+}
+
+/** DetailsCocktail.php */
+
+/* .media img {
+    border-radius: 10px;
+} */
+
+#recette {
+    width:50%;
+    margin:0 auto;
+    border:1px solid grey;
+    border-radius:10px;
+    position:relative;
+    top:-30px;
+}
+
+.cocktailsFamille {
+    max-width:728px;
+    width:728px;
+    margin:0 auto;
+    height:21rem;
+    overflow: hidden;
+    box-shadow: 0 0 8px 8px rgba(0,0,0,0.2);
+    position:relative;
+    border-radius: 5px;
+}
+
+.reglette {
+    height: 100%;
+    position: relative;
+    /* transition: left 0.2s ease-out ; */
+    width:100%;
+    justify-content: center;
+}
+
+.fa-chevron-circle-right {
+    font-size: 2.5rem;
+    color:white;
+}
+
+.card2 {
+    width:15rem !important;
+    flex-basis:15rem;
+    flex-shrink: 0;
+}
+
+#prev, #next {
+    height:100%;
+    max-width:3rem;
+    width:10%;
+    background-color: rgba(46, 42, 42, 0.289);
+    position:absolute;
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+}
+
+#next {
+    right:0;
+}
+
+
+/** AjoutCocktail.php */
+
+#ajout {
+    position:relative;
+}
+
+#divAjoutFam {
+    /* position:relative; */
+    margin:0 auto;
+    /* height:100px;
+    top:30vh; */
+    /* z-index: 1; */
+}
+
+.form-cocktail {
+    width:80%;
+    margin:0 auto;
+}
+
+.form-ingredient {
+    width:80%;
+    margin:0 auto;
+    border:solid;
+}

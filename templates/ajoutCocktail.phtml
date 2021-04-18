@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajout Cocktail</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" /> 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="assets/css/cocktails.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+                <a class="navbar-brand" href="index.php"><i class="fas fa-cocktail"></i></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+        
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <?php include 'templates/inc/nav.phtml' ?>
+                </div>
+            </nav>
+            <div class="header">
+                <h1>Mister Cocktails</h1>
+            </div>
+        </div>
+    </header>
+        <main> 
+            <div id="ajout" class="container">
+                <div>
+                    <h2>Ajout d'un cocktail <i class="fas fa-cocktail"></i> et des ingrédients dans la base de données</h2>
+                </div>
+                <div class="row">
+                    <div class="col-7">
+                        <div class="form-cocktail">
+                            <h3>Cocktail</h3>
+                            <div class="d-block">
+                                <div class="d-none" id="divAjoutFam">
+                                    <div class="modal-content" id="divAjoutFam">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title" id="exampleModalLabel">Créer une catégorie</h3>
+                                            <button type="button" class="close closes" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="POST">
+                                                <div class="form-group">
+                                                    <label for="nomFamille" class="col-form-label"></label>
+                                                    <input type="text" class="form-control" id="nomFamille" name="nomFamille" placeholder="Nouvelle Catégorie">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" id="close" class="closes btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                    <button type="submit" id="ok" class="btn btn-dark">Créer</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    </div>
+                            </div>
+                            <form action="ajoutCocktail.php" method="POST" enctype="multipart/form-data" class="formAjout">
+                                <div class="messages d-block">
+                                    <?= $msg; // Affichage du message d'erreur ?>
+                                    <?= $msgFam; ?>
+                                    <?= $msgValide; // Affichage du message de validation ?>
+                                </div>
+                                <div class="newCard opacity-5 <?php if($errorSQL2 == 0){
+                                     echo 'd-flex justify-content-center'; } else { echo 'd-none'; } ?>">
+                                    <div class="card cocktail bg-light">
+                                        <img src="assets/images/cocktails/<?=$cocktailAjoute[0]['urlPhoto']?>" class="card-img-top" alt="<?=$cocktailAjoute[0]['urlPhoto']?>">
+                                        <div class="card-body bg-light">
+                                            <h5 class="card-title"><?=$cocktailAjoute[0]['nom'] ?></h5>
+                                            <p class="card-text "><?=$cocktailAjoute[0]['description'] ?></p>
+                                        </div>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item bg-light">Année de conception : <?=$cocktailAjoute[0]['anneeConception']?></li>
+                                            <li class="list-group-item bg-light">Prix moyen : <?=$cocktailAjoute[0]['prixMoyen']?>€</li>
+                                            <li class="list-group-item bg-light text-center"><a class="btn btn-lg btn-dark" href="index.php?categorie=<?=$cocktailAjoute[0]['nomFamille']?>"><?=$cocktailAjoute[0]['nomFamille']?></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="idFamille">Catégorie</label>
+                                    <select class="form-control" name="idFamille" id="idFamille">
+                                        <option value="" selected disabled>-- Choisir une catégorie --</option>
+                                        <?php foreach($listeDesCategories AS $soustableau) { ?>
+                                            <option value="<?=$soustableau['id']?>">
+                                                <?=$soustableau['nomFamille']?>
+                                            </option>
+                                        <?php } ?>
+                                        <option value="new">-- Créer une catégorie --</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Informations sur le cocktail</label>      
+                                    <input class="form-control" type="text" name="nom" placeholder="Nom du cocktail" value="<?= $nom ?>">
+                                </div>
+                                <div class="form-group">
+                                        <textarea class="form-control" name="description" id="description" cols="30" rows="10" placeholder="Description"><?= $desc ?></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="prixMoyen" placeholder="Prix Moyen" value="<?= $prixMoyen ?>">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="anneeConception" placeholder="Année de conception" value="<?= strstr($anneeConception,'-',true) ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="urlPhoto"><i class="far fa-image" style="font-size:1.2rem"></i> Image</label>
+                                    <input class="form-control" type="file" name="urlPhoto" id="urlPhoto">
+                                </div>
+                                <div>
+                                    <button id="ok" class="btn btn-dark" type="submit" name="ajouter"><i class="fas fa-plus-circle"></i></button>
+                                </div>
+                            </form>  
+                        </div>
+                    </div>
+                    <div class="col-5">
+
+                        <h3>Ingrédient</h3>
+                        <form action="" method="POST">
+                            <div class="form-group">
+                                <?= $msgRelation ?>
+                                <label for="listeCocktail">Liste des cocktails</label>
+                                <select class="form-control" name="listeCocktail" id="listeCocktail">
+                                    <option value="" selected disabled>-- Choisir un cocktail --</option>
+                                    <?php foreach($listeCocktails AS $soustableau) { ?>
+                                        <option value="<?=$soustableau['id']?>"><?=$soustableau['nom']?></option>
+                                    <?php } ?> 
+                                </select>
+                            </div>
+                                <div class="form-group">
+                                    <label for="listeIngredient">Liste des ingrédients</label>
+                                    <select class="form-control" name="listeIngredient" id="listeIngredient">
+                                        <option value="" selected disabled>-- Choisir un ingrédient --</option>
+                                        <?php foreach($listeIngredients AS $soustableau) { ?>
+                                            <option value="<?=$soustableau['id']?>"><?=$soustableau['nomIngredient']?></option>
+                                        <?php } ?>
+                                        <option value="newIngredient">-- Créer un ingrédient --</option> 
+                                    </select>
+                                </div>
+                            <button type="submit" class="btn btn-dark">Ajouter l'ingredient au cocktail</button>
+                        </form>
+                        <div class="d-none mt-4" id="divAjoutIngredient">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title" id="exampleModalLabel">Créer un ingrédient</h3>
+                                    <button type="button" class="close closes" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="POST">
+                                        <div class="form-group">
+                                            <label for="nomIngredient" class="col-form-label"></label>
+                                            <input type="text" class="form-control" id="nomIngredient" name="nomIngredient" placeholder="Nouvel Ingrédient">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" id="close" class="closes btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                            <button type="submit" id="ingredient" class="btn btn-dark">Créer</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>      
+            </div> 
+        </main>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script src="assets/js/ajoutCocktail.js"></script>
+</body>
+</html>
